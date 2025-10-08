@@ -1,6 +1,6 @@
-﻿namespace Blogy.Entity.Entities.Common
+﻿namespace Blogy.Business.DTOs.Common
 {
-   public abstract class BaseEntity
+    public abstract class BaseDto
     {
         public int Id { get; set; }
 
