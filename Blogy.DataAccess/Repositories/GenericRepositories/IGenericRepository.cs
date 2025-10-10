@@ -15,7 +15,7 @@ namespace Blogy.DataAccess.Repositories.GenericRepositories
 
         Task UpdateAsync(TEntity entity);
 
-        Task DeleteAsync(int id);
+        Task DeleteAsync(int  id);
 
 
     }
