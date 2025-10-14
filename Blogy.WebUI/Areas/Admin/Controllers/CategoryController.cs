@@ -19,6 +19,7 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
         {
             return View();
         }
+       
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryDto categoryDto)
         { 
@@ -30,6 +31,7 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+       
         public async Task<IActionResult> UpdateCategory(int id)
         { 
             var category=await _categoryService.GetByIdAsync(id);

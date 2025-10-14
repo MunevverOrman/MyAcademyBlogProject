@@ -2,6 +2,7 @@
 using Blogy.Business.DTOs.CategoryDtos;
 using Blogy.DataAccess.Repositories.CategoryRepositories;
 using Blogy.Entity.Entities;
+using Microsoft.VisualBasic;
 
 namespace Blogy.Business.Services.CategoryServices
 {
@@ -37,6 +38,12 @@ namespace Blogy.Business.Services.CategoryServices
         {
             var category = await _categoryRepository.GetByIdAsync(id);
             return _mapper.Map<UpdateCategoryDto>(category); //değişkene atama içinde
+        }
+
+        public async Task<List<ResultCategoryDto>> GetCategoriesWithBlogsAsync()
+        {
+            var categories =await _categoryRepository.GetCategoriesWithBlogsAsync();
+            return _mapper.Map<List<ResultCategoryDto>>(categories);
         }
 
         public async Task UpdateAsync(UpdateCategoryDto categoryDto)

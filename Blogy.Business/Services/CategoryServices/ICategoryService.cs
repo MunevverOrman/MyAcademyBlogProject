@@ -6,6 +6,8 @@ namespace Blogy.Business.Services.CategoryServices
     {
         Task<List<ResultCategoryDto>>GetAllAsync(); //listeleme
 
+        Task<List<ResultCategoryDto>> GetCategoriesWithBlogsAsync(); 
+
         Task<UpdateCategoryDto>GetByIdAsync(int id); //id ye göre getirme
 
         Task CreateAsync(CreateCategoryDto categoryDto);

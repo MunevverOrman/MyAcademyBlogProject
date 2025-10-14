@@ -19,5 +19,7 @@ namespace Blogy.Business.DTOs.BlogDtos
         public int CategoryId { get; set; }
 
         public ResultCategoryDto Category { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

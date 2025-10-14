@@ -7,7 +7,7 @@ namespace Blogy.DataAccess.Repositories.BlogRepositories
 {
     public class BlogRepository : GenericRepository<Blog>, IBlogRepository
     {
-        public BlogRepository(AppDbContext context) : base(context)
+        public BlogRepository(AppDbContext context) : base(context) //Genericrepository'den miras alır
         {
         }
 
