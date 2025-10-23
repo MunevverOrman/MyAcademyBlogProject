@@ -7,5 +7,7 @@ namespace Blogy.DataAccess.Repositories.BlogRepositories
     {
         Task<List<Blog>> GetBlogsWithCategoriesAsync();
 
+        Task<List<Blog>> GetLast3BlogsAsync(); //en son eklenen 3 blogu getirir
+
     }
 }

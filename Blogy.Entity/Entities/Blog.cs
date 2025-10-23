@@ -20,5 +20,13 @@ namespace Blogy.Entity.Entities
         public Category Category { get; set; }
 
         public IList<BlogTag>BlogTags { get; set; }
+
+
+        //bire çok ilişki.yazar blog arasında.
+        public int WriterId { get; set; }
+
+        public AppUser Writer { get; set; }
+
+        public IList<Comment> Comments { get; set; }
     }
 }
