@@ -8,9 +8,9 @@ namespace Blogy.Business.Mappings
     {
         public UserMappings()
         {
-            CreateMap<AppUser,ResultUserDto>()
-                .ForMember(dest=>dest.FullName,opt=>opt.MapFrom(src=>string.Join(" ", 
-                src.FirstName ,src.LastName)));
+            CreateMap<AppUser, ResultUserDto>()
+                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Join(" ", src.FirstName, src.LastName)));
+
         }
     }
 }

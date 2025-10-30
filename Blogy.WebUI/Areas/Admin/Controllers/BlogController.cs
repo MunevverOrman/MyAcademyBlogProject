@@ -1,6 +1,7 @@
 ﻿using Blogy.Business.DTOs.BlogDtos;
 using Blogy.Business.Services.BlogServices;
 using Blogy.Business.Services.CategoryServices;
+using Blogy.WebUI.Areas.Consts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,30 +9,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Blogy.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
-    public class BlogController : Controller
+    [Authorize(Roles = $"{Roles.Admin}")]
+    public class BlogController(IBlogService _blogService, ICategoryService _categoryService) : Controller
     {
-        private readonly IBlogService _blogService;
-        private readonly ICategoryService _categoryService;
-
-        public BlogController(IBlogService blogService, ICategoryService categoryService)
-        {
-            _blogService = blogService;
-            _categoryService = categoryService;
-        }
-
         private async Task GetCategoriesAsync()
         {
             var categories = await _categoryService.GetAllAsync();
 
-            ViewBag.Categories = categories
-                .Select(category => new SelectListItem
-                {
-                    Text = category.CategoryName,
-                    Value = category.Id.ToString()
-                })
-                .ToList();
+            ViewBag.categories = (from category in categories
+                                  select new SelectListItem
+                                  {
+                                      Text = category.CategoryName,
+                                      Value = category.Id.ToString()
+                                  }).ToList();
         }
+
 
         public async Task<IActionResult> Index()
         {
@@ -39,7 +31,6 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
             return View(blogs);
         }
 
-        [HttpGet]
         public async Task<IActionResult> CreateBlog()
         {
             await GetCategoriesAsync();
@@ -58,17 +49,20 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
             await _blogService.CreateAsync(blogDto);
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> DeleteBlog(int id)
         {
             await _blogService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> UpdateBlog(int id)
         {
             await GetCategoriesAsync();
             var blog = await _blogService.GetByIdAsync(id);
             return View(blog);
         }
+
         [HttpPost]
         public async Task<IActionResult> UpdateBlog(UpdateBlogDto updateBlogDto)
         {
@@ -77,9 +71,9 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
                 await GetCategoriesAsync();
                 return View(updateBlogDto);
             }
+
             await _blogService.UpdateAsync(updateBlogDto);
             return RedirectToAction("Index");
-
         }
     }
 }

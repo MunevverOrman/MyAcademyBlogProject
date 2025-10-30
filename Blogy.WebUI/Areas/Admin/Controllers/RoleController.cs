@@ -1,4 +1,6 @@
 ﻿using Blogy.Entity.Entities;
+using Blogy.WebUI.Areas.Consts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 namespace Blogy.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = $"{Roles.Admin}")]
     public class RoleController(RoleManager<AppRole> _roleManager) : Controller
     {
         public async Task<IActionResult> Index()
@@ -33,6 +36,13 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
                 }
                 return View(model);
             }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteRole(int id)
+        {
+            var role=await _roleManager.FindByIdAsync(id.ToString());
+            await _roleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
     }
