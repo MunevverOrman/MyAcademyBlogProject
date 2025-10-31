@@ -1,0 +1,22 @@
+﻿@model ChangePasswordDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Şifre değiştirme sayfası</h1>
+
+<form method="post">
+    <label>mevcut şifreniz</label>
+    <input type="password" asp-for="CurrentPassword" class="form-control" required/>
+    <br/ >
+      <label>yeni şifreniz</label>
+    <input type="password" asp-for="NewPassword" class="form-control" required/>
+    <br/ >
+    <label>yeni şifreyi tekrar şifreniz</label>
+    <input type="password" asp-for="ConfirmPassword" class="form-control" required />
+    <br />
+    <span class="text-danger">@Html.ValidationSummary()</span>
+    <button class="btn btn-outline-dark">Şifreyi Değiştir</button>
+
+</form>

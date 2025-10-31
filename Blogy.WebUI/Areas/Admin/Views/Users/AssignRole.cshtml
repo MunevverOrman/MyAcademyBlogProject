@@ -5,7 +5,7 @@
 }
 
 <h1>Rol atama sayfası</h1>
-<h4>@ViewBag.fullName kullanıcısına rol atama yapabilirsiiz.</h4>
+<h4>@ViewBag.fullName kullanıcısına rol atama yapabilirsiniz.</h4>
 <form method="post">
 
     @for (int i = 0; i < Model.Count; i++)
@@ -14,7 +14,7 @@
             <input type="hidden" asp-for="@Model[i].RoleId"/>
             <input type="hidden" asp-for="@Model[i].RoleName"/>
             <input type="hidden" asp-for="@Model[i].UserId"/>
-            <input type="checkbox" asp-asp-for="@Model[i].RoleExists" class="form-check-input"/>
+            <input type="checkbox" asp-for="@Model[i].RoleExists" class="form-check-input"/>
             <label class="form-check-label">@Model[i].RoleName</label>
         </div>
     }

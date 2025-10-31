@@ -1,0 +1,67 @@
+﻿@model EditProfileDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>profil bilgileri güncelleme sayfası</h3>
+
+<div class="card text-center">
+    <div class="card-title">
+        <h4>Profil resmi</h4>
+    </div>
+    <div>
+
+    </div class="card-body">
+    <img src="@Model.ImageUrl" style="heigh:100px ;width:100px" alt="Profil resmi"/>
+
+    </div>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row"> 
+        <div class="col-6">
+            <label>Profil resmi</label>
+            <input type="file" asp-for="ImageFile" class="form-control" />
+
+            <label>Ad</label>
+            <input type="text" asp-for="FirstName" class="form-control" required />
+            <br/>
+            <label>Soyad</label>
+            <input type="text" asp-for="LastName" class="form-control" required />
+            <br />
+            <label>Kullanıcı Ad</label>
+            <input type="text" asp-for="UserName" class="form-control" required />
+            <br />
+            
+        </div>
+       
+
+        <div class="col-6">
+            <label>Email</label>
+            <input type="email" asp-for="Email" class="form-control" required />
+            <br />
+            <label>Unvan</label>
+            <input type="text" asp-for="Title" class="form-control" />
+            <br />
+            <label>Telefon Numarası</label>
+            <input type="text" asp-for="PhoneNumber" class="form-control" />
+            <br />
+
+            <input type="hidden" asp-for="ImageUrl" />
+          
+
+        </div>
+
+        <div class="col-12">
+            <label>Bilgileri güncellemek için mevcut şifreleri girin</label>
+            <input type="password" asp-for="CurrentPassword" class="form-control" required />
+        </div>
+         <br />
+         <span class="text-danger">@Html.ValidationSummary()  </span>
+         <button class="btn btn-outline-dark">Bilgileri Güncelle</button>
+
+    </div>
+
+
+</form>

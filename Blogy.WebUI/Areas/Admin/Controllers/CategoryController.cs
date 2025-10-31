@@ -1,6 +1,6 @@
 ﻿using Blogy.Business.DTOs.CategoryDtos;
 using Blogy.Business.Services.CategoryServices;
-using Blogy.WebUI.Areas.Consts;
+using Blogy.WebUI.Consts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

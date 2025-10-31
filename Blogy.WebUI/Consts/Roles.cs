@@ -1,4 +1,4 @@
-﻿namespace Blogy.WebUI.Areas.Consts
+﻿namespace Blogy.WebUI.Consts
 {
     public class Roles
     {
