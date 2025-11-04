@@ -22,6 +22,8 @@ namespace Blogy.DataAccess.Context
 
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
     }
 }
  
