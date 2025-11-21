@@ -9,6 +9,8 @@ using Blogy.Entity.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Scrutor;
+using System.Reflection;
 
 namespace Blogy.DataAccess.Extencions
 {
@@ -16,17 +18,21 @@ namespace Blogy.DataAccess.Extencions
     {
         public static void AddRepositoriesExt(this IServiceCollection services,IConfiguration configuration )
         {
-            services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IBlogRepository, BlogRepository>();
-           
-            services.AddScoped<IBlogTagRepository, BlogTagRepository>();
-            services.AddScoped<ISocialRepository, SocialRepository>();
-            services.AddScoped<ITagRepository, TagRepository>();
+            services.Scan(opt =>
+            {
+                opt.FromAssemblies(Assembly.GetExecutingAssembly())
+                .AddClasses(publicOnly: false)
+                .UsingRegistrationStrategy(registrationStrategy: RegistrationStrategy.Skip)
+                .AsMatchingInterface()
+                .AsImplementedInterfaces()
+                .WithScopedLifetime();
+            });
+
 
             services.AddDbContext<AppDbContext>(Options =>
             {
                 Options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                Options.UseLazyLoadingProxies();
 
             });
 
@@ -36,6 +42,11 @@ namespace Blogy.DataAccess.Extencions
 
             })
                 .AddEntityFrameworkStores<AppDbContext>();
+        }
+
+        private static void publicOnly(IImplementationTypeFilter filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

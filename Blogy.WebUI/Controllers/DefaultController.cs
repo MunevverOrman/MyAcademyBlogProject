@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Blogy.Business.Services.BlogServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blogy.WebUI.Controllers
 {
-    public class DefaultController : Controller
+    public class DefaultController(IBlogService _blogService) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var blogs = await _blogService.GetAllAsync(); 
+            return View(blogs);
         }
     }
 }

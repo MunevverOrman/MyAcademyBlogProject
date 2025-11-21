@@ -24,6 +24,10 @@ namespace Blogy.DataAccess.Context
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<About> Abouts { get; set; }
+
+        public DbSet<Contact> Contacts { get; set; }
+
     }
 }
  

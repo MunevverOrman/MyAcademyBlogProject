@@ -12,9 +12,9 @@ namespace Blogy.Entity.Entities
 
         public string? ImageUrl { get; set; }
 
-        public IList<Blog> Blogs { get; set; } //bire çok ilişki.yazar blog arasında.
+        public virtual IList<Blog> Blogs { get; set; } //bire çok ilişki.yazar blog arasında.
 
-        public IList<Comment> Comments { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
 
 
     }

@@ -17,16 +17,14 @@ namespace Blogy.Entity.Entities
 
         public int CategoryId { get; set; } 
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public IList<BlogTag>BlogTags { get; set; }
+        public virtual IList<BlogTag>BlogTags { get; set; }
 
-
-        //bire çok ilişki.yazar blog arasında.
         public int WriterId { get; set; }
 
-        public AppUser Writer { get; set; }
+        public virtual AppUser? Writer { get; set; }
 
-        public IList<Comment> Comments { get; set; }
+        public virtual IList<Comment> Comments { get; set; }
     }
 }

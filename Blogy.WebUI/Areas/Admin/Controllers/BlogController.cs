@@ -30,7 +30,7 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var blogs = await _blogService.GetBlogsWithCategoriesAsync();
+            var blogs = await _blogService.GetAllAsync();
             return View(blogs);
         }
 

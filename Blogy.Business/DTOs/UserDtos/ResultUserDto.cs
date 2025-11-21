@@ -12,6 +12,8 @@ namespace Blogy.Business.DTOs.UserDtos
 
         public string Email { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public IList<string> Roles { get; set; }
     }
 }
