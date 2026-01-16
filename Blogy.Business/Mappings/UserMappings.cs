@@ -12,8 +12,9 @@ namespace Blogy.Business.Mappings
             CreateMap<AppUser, ResultUserDto>()
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => string.Join(" ", src.FirstName, src.LastName)));
 
-            CreateMap<AppUser, EditProfileDto>().ReverseMap(); //kullanıcı bilgileri maplanip dto türünde gelcek
-          
+            
+            CreateMap<AppUser, EditProfileDto>().ReverseMap();
+
 
         }
     }

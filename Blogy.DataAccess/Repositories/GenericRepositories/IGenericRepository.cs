@@ -9,6 +9,7 @@ namespace Blogy.DataAccess.Repositories.GenericRepositories
 
         Task<List<TEntity>> GetAllAsync(Expression<Func <TEntity,bool>> filter);
 
+
         Task<TEntity> GetByIdAsync(int id);
 
         Task CreateAsync(TEntity entity);

@@ -3,6 +3,12 @@
     ViewData["Title"] = "BlogDetails";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
+@if (Model == null)
+{
+    <div class="alert alert-danger">Blog bulunamadı (Model null).</div>
+    return;
+}
+
 
 <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('@Model.CoverImage');">
     <div class="container">
@@ -49,17 +55,17 @@
                 <div class="pt-5">
                     <p>
                         Kategori:  <a href="#">@Model.Category.CategoryName</a>
-
-
+                        
                     </p>
                 </div>
-
-
                 <div class="pt-5 comment-wrap">
-                    <h3 class="mb-5 heading">@Model.Comments.Count Yorum</h3>
+                    <h3 class="mb-5 heading">
+                        @(Model.Comments?.Count ?? 0)
+                        Yorum
+                    </h3>
                     <ul class="comment-list">
-
                         @foreach (var comment in Model.Comments)
+
                         {
                             <li class="comment">
                                 <div class="vcard">
@@ -69,43 +75,43 @@
                                     <h3>@comment.User.FullName</h3>
                                     <div class="meta">@comment.CreatedDate</div>
                                     <p>@comment.Content</p>
-
                                 </div>
                             </li>
                         }
 
-
-
                     </ul>
-                    <!-- END comment-list -->
-
-                    <div class="comment-form-wrap pt-5">
-                        <h3 class="mb-5">Leave a comment</h3>
-                        <form action="#" class="p-5 bg-light">
-                            <div class="form-group">
-                                <label for="name">Name *</label>
-                                <input type="text" class="form-control" id="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="website">Website</label>
-                                <input type="url" class="form-control" id="website">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Post Comment" class="btn btn-primary">
-                            </div>
-
-                        </form>
-                    </div>
                 </div>
+
+
+
+                <div class="comment-form-wrap pt-5">
+                    <h3 class="mb-5">Yorum Yap</h3>
+
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" action="/User/Comment/AddComment" class="p-5 bg-light">
+                            <input type="hidden" name="BlogId" value="@Model.Id" />
+
+                            <div class="form-group mb-3">
+                                <label>Yorum</label>
+                                <textarea name="Content" cols="30" rows="6" class="form-control"
+                                      placeholder="Yorumunu yaz..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning p-4 bg-light">
+                            Yorum yapmak için giriş yapmalısın.
+                            <a href="/Login/Index" class="btn btn-sm btn-dark ms-2">Giriş Yap</a>
+                        </div>
+                    }
+                </div>
+
 
             </div>
 

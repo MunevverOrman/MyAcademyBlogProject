@@ -4,5 +4,7 @@ namespace Blogy.Business.Services.CommentServices
 {
     public interface ICommentService:IGenericService<ResultCommentDto,UpdateCommentDto,CreateCommentDto>
     {
+        Task<List<ResultCommentDto>> GetCommentsByUserIdAsync(int userId);
+        Task<List<ResultCommentDto>> GetCommentsByBlogIdAsync(int blogId);
     }
 }

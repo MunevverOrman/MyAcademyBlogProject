@@ -12,8 +12,9 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = $"{Roles.Admin}")]
-
-    public class BlogController(IBlogService _blogService, ICategoryService _categoryService, UserManager<AppUser> _userManager) : Controller
+    public class BlogController(IBlogService _blogService,
+                                ICategoryService _categoryService,
+                                UserManager<AppUser> _userManager) : Controller
     {
         private async Task GetCategoriesAsync()
         {
@@ -48,7 +49,7 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
                 await GetCategoriesAsync();
                 return View(blogDto);
             }
-           
+
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             blogDto.WriterId = user.Id;
             await _blogService.CreateAsync(blogDto);
@@ -76,9 +77,13 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
                 await GetCategoriesAsync();
                 return View(updateBlogDto);
             }
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            updateBlogDto.WriterId = user.Id;
 
             await _blogService.UpdateAsync(updateBlogDto);
             return RedirectToAction("Index");
         }
+
+
     }
 }

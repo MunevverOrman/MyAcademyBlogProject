@@ -11,8 +11,6 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
 {
     [Area(Roles.Admin)]
     [Authorize(Roles = $"{Roles.Admin}")]
-
-
     public class UsersController(
         UserManager<AppUser> _userManager,
         IMapper _mapper,

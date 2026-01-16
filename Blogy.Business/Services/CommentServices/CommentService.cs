@@ -40,6 +40,19 @@ namespace Blogy.Business.Services.CommentServices
             return _mapper.Map<UpdateCommentDto>(value);
         }
 
+        public async Task<List<ResultCommentDto>> GetCommentsByUserIdAsync(int userId)
+        {
+            var values = await _commentRepository.GetCommentsByUserIdAsync(userId);
+            return _mapper.Map<List<ResultCommentDto>>(values);
+        }
+
+        public async Task<List<ResultCommentDto>> GetCommentsByBlogIdAsync(int blogId)
+        {
+            var values = await _commentRepository.GetCommentsByBlogIdAsync(blogId);
+            return _mapper.Map<List<ResultCommentDto>>(values);
+        }
+
+
         public async Task<ResultCommentDto> GetSingleByIdAsync(int id)
         {
             var value = await _commentRepository.GetByIdAsync(id);

@@ -1,6 +1,7 @@
 ﻿@using PagedList.Core
 @using PagedList.Core.Mvc
 @model PagedList<ResultBlogDto>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
@@ -8,7 +9,6 @@
     var customOptions = PagedListRenderOptions.Bootstrap4PageNumbersPlusPrevAndNext;
     customOptions.LinkToPreviousPageFormat = "Önceki";
     customOptions.LinkToNextPageFormat = "Sonraki";
-
 }
 
 <div class="hero overlay inner-page bg-primary py-5">
@@ -29,25 +29,50 @@
 
                 @foreach (var item in Model)
                 {
-                    
-             
-                <div class="blog-entry d-flex blog-entry-search-item">
-                    <a href="single.html" class="img-link me-4">
-                        <img src="@item.CoverImage" alt="Image" class="img-fluid">
-                    </a>
-                    <div>
-                            <span class="date">@item.CreatedDate, 2022 &bullet; <a href="#">@item.Category.CategoryName</a></span>
-                        <h2><a href="single.html">@item.Title</a></h2>
-                            <p>(item.Description.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)</p>
-                        <p><a href="/Blog/BlogDetails/@item.Id" class="btn btn-sm btn-outline-primary">Devamını oku</a></p>
+                    <div class="blog-entry d-flex blog-entry-search-item">
+
+                        
+                        <a asp-controller="Blog"
+                           asp-action="BlogDetails"
+                           asp-route-id="@item.Id"
+                           class="img-link me-4">
+                            <img src="@item.CoverImage" alt="Image" class="img-fluid">
+                        </a>
+
+                        <div>
+                            <span class="date">
+                                @item.CreatedDate, 2022 &bullet;
+                                <a href="#">@item.Category.CategoryName</a>
+                            </span>
+
+                           
+                            <h2>
+                                <a asp-controller="Blog"
+                                   asp-action="BlogDetails"
+                                   asp-route-id="@item.Id">
+                                    @item.Title
+                                </a>
+                            </h2>
+
+                            
+                            <p>@(item.Description.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)</p>
+
+                            
+                            <p>
+                                <a asp-controller="Blog"
+                                   asp-action="BlogDetails"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-outline-primary">
+                                    Devamını oku
+                                </a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-
-
                 }
+
                 <div class="row text-start pt-5 border-top">
                     <div class="col-md-12">
-                       <pager asp-action="Index" asp-controller="Blog" list="@Model" options="@customOptions"> </pager>
+                        <pager asp-action="Index" asp-controller="Blog" list="@Model" options="@customOptions"></pager>
                     </div>
                 </div>
 
@@ -61,7 +86,7 @@
                         <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
                     </form>
                 </div>
-                <!-- END sidebar-box -->
+
                 <div class="sidebar-box">
                     <h3 class="heading">Popular Posts</h3>
                     <div class="post-entry-sidebar">
@@ -102,7 +127,6 @@
                         </ul>
                     </div>
                 </div>
-                <!-- END sidebar-box -->
 
                 <div class="sidebar-box">
                     <h3 class="heading">Categories</h3>
@@ -114,7 +138,6 @@
                         <li><a href="#">Adventure <span>(14)</span></a></li>
                     </ul>
                 </div>
-                <!-- END sidebar-box -->
 
                 <div class="sidebar-box">
                     <h3 class="heading">Tags</h3>
@@ -138,4 +161,3 @@
         </div>
     </div>
 </div>
-

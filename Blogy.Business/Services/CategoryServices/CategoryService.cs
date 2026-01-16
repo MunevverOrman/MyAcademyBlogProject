@@ -37,7 +37,7 @@ namespace Blogy.Business.Services.CategoryServices
         public async Task<UpdateCategoryDto> GetByIdAsync(int id)
         {
             var category = await _categoryRepository.GetByIdAsync(id);
-            return _mapper.Map<UpdateCategoryDto>(category); //değişkene atama içinde
+            return _mapper.Map<UpdateCategoryDto>(category); 
         }
 
         public async Task<List<ResultCategoryDto>> GetCategoriesWithBlogsAsync()
